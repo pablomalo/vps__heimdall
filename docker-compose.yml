@@ -1,0 +1,23 @@
+version: "3"
+
+networks:
+  proxynet:
+    external: true
+
+services:
+  heimdall:
+    image: linuxserver/heimdall:2.4.12
+    env_file: .env
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+    networks:
+      - proxynet
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=proxynet'
+      - 'traefik.http.routers.heimdall.rule=Host(`${HOSTNAME}`)'
+      - 'traefik.http.routers.heimdall.entrypoints=websecure'
+      - 'traefik.http.routers.heimdall.tls=true'
+#      - "traefik.http.routers.heimdall.middlewares=forward-auth"
+
