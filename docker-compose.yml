@@ -5,12 +5,13 @@ networks:
     external: true
 
 services:
-  heimdall:
+  app:
     image: linuxserver/heimdall:2.4.12
     env_file: .env
     volumes:
-      - ./config:/config
-      - ./downloads:/downloads
+      - './config:/config'
+      - './favicons:/config/favicons'
+      - './downloads:/downloads'
     networks:
       - proxynet
     labels:
@@ -19,5 +20,4 @@ services:
       - 'traefik.http.routers.heimdall.rule=Host(`${HOSTNAME}`)'
       - 'traefik.http.routers.heimdall.entrypoints=websecure'
       - 'traefik.http.routers.heimdall.tls=true'
-#      - "traefik.http.routers.heimdall.middlewares=forward-auth"
 

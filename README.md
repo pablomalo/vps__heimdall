@@ -8,8 +8,9 @@ A dashboard for all your web applications. See https://github.com/linuxserver/He
 
 2. `docker-compose up -d`
 
-3. Run the following commands for the app name to be picked up.
+3. Run the following commands for the app name to be picked up and the favicons to be in place.
    ```
-   docker compose exec -it heimdall php /var/www/localhost/heimdall/artisan
-   docker compose exec -it heimdall php /var/www/localhost/heimdall/artisan config:clear
+   docker compose exec -it app php /var/www/localhost/heimdall/artisan config:cache
+   docker compose exec -it app php /var/www/localhost/heimdall/artisan config:clear
+   docker compose exec -it app bash /config/favicons/copy-favicons.sh
    ```
